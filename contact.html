@@ -24,7 +24,14 @@
       </nav>
       <div class="header-actions">
         <button class="header-action-btn" id="searchBtn"><i class="fas fa-search"></i></button>
-        <a href="#" class="header-action-btn" id="wishlistBtn"><i class="far fa-heart"></i></a>
+        <a href="#" class="header-action-btn" id="wishlistBtn" role="button" aria-label="Favoris" aria-controls="wishlistPanel" aria-expanded="false">
+          <i class="far fa-heart"></i>
+          <span class="cart-count wishlist-count" style="display:none;">0</span>
+        </a>
+        <button class="header-action-btn" id="cartBtn" aria-label="Panier">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
       </div>
     </div>
   </header>

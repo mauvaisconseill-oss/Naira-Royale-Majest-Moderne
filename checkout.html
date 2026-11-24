@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paiement — Naira Royale</title>
-  <meta http-equiv="refresh" content="0;url=index.html">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
@@ -20,7 +19,7 @@
       </nav>
       <div class="header-actions">
         <span style="font-size:0.8rem; color:var(--gray); display:flex; align-items:center; gap:6px;">
-          <i class="fas fa-lock" style="color:var(--gold);"></i> Paiement sécurisé
+          <i class="fas fa-lock" style="color:var(--gold);"></i> Votre commande
         </span>
       </div>
     </div>
@@ -29,74 +28,15 @@
   <!-- Checkout -->
   <section>
     <div class="container">
-      <div class="checkout-layout">
+      <div id="checkoutPaymentStatus" class="checkout-payment-status" role="status" aria-live="polite" hidden></div>
+      <div class="checkout-layout" id="checkoutLayout">
         <!-- Left: Forms -->
         <div>
-          <!-- Contact -->
           <div class="checkout-section">
-            <h2>Contact</h2>
-            <div class="form-row full">
-              <div class="form-group">
-                <label>Adresse e-mail</label>
-                <input type="email" placeholder="votre@email.com">
-              </div>
-            </div>
-            <label class="filter-option" style="margin-top:8px;">
-              <input type="checkbox"> M'envoyer les actualités et offres par e-mail
-            </label>
-          </div>
-
-          <!-- Shipping Address -->
-          <div class="checkout-section">
-            <h2>Adresse de livraison</h2>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Prénom</label>
-                <input type="text" placeholder="Prénom">
-              </div>
-              <div class="form-group">
-                <label>Nom</label>
-                <input type="text" placeholder="Nom">
-              </div>
-            </div>
-            <div class="form-row full">
-              <div class="form-group">
-                <label>Adresse</label>
-                <input type="text" placeholder="Numéro et nom de rue">
-              </div>
-            </div>
-            <div class="form-row full">
-              <div class="form-group">
-                <label>Complément d'adresse (optionnel)</label>
-                <input type="text" placeholder="Appartement, étage, bâtiment...">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Code postal</label>
-                <input type="text" placeholder="75000">
-              </div>
-              <div class="form-group">
-                <label>Ville</label>
-                <input type="text" placeholder="Paris">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Pays</label>
-                <select>
-                  <option>France</option>
-                  <option>Belgique</option>
-                  <option>Suisse</option>
-                  <option>Luxembourg</option>
-                  <option>Canada</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Téléphone</label>
-                <input type="tel" placeholder="+33 6 00 00 00 00">
-              </div>
-            </div>
+            <h2>Coordonnées et livraison</h2>
+            <p style="font-size:0.9rem; color:var(--gray);">
+              Stripe ou PayPal te demandera ton adresse e-mail et tes coordonnées de livraison sur sa page sécurisée.
+            </p>
           </div>
 
           <!-- Delivery -->
@@ -129,69 +69,19 @@
           <!-- Payment -->
           <div class="checkout-section">
             <h2>Paiement</h2>
-            <p style="font-size:0.85rem; color:var(--gray); margin-bottom:16px;">
-              <i class="fas fa-lock" style="color:var(--gold);"></i> Toutes les transactions sont sécurisées et chiffrées.
+            <p style="font-size:0.9rem; color:var(--gray); margin-bottom:16px;">
+              Choisis ton moyen de paiement. Tu seras redirigée vers le site du prestataire.
             </p>
-            <div class="payment-methods">
-              <label class="payment-method active">
-                <input type="radio" name="payment" value="card" checked>
-                <i class="far fa-credit-card" style="font-size:1.3rem;"></i>
-                <div>
-                  <strong>Carte bancaire</strong>
-                  <p style="font-size:0.75rem; color:var(--gray);">Visa, Mastercard, CB</p>
-                </div>
-              </label>
-              <label class="payment-method">
-                <input type="radio" name="payment" value="paypal">
-                <i class="fab fa-paypal" style="font-size:1.3rem; color:#003087;"></i>
-                <strong>PayPal</strong>
-              </label>
-              <label class="payment-method">
-                <input type="radio" name="payment" value="apple">
-                <i class="fab fa-apple-pay" style="font-size:1.5rem;"></i>
-                <strong>Apple Pay</strong>
-              </label>
-              <label class="payment-method">
-                <input type="radio" name="payment" value="google">
-                <i class="fab fa-google-pay" style="font-size:1.5rem;"></i>
-                <strong>Google Pay</strong>
-              </label>
-            </div>
-
-            <!-- Card Details (Interface Only) -->
-            <div id="cardDetails" style="margin-top:20px; padding:24px; background:var(--off-white); border-radius:var(--radius-md);">
-              <div class="form-row full">
-                <div class="form-group">
-                  <label>Numéro de carte</label>
-                  <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Date d'expiration</label>
-                  <input type="text" placeholder="MM / AA" maxlength="7">
-                </div>
-                <div class="form-group">
-                  <label>Code de sécurité (CVV)</label>
-                  <input type="text" placeholder="123" maxlength="4">
-                </div>
-              </div>
-              <div class="form-row full">
-                <div class="form-group">
-                  <label>Nom sur la carte</label>
-                  <input type="text" placeholder="NOM PRÉNOM">
-                </div>
-              </div>
+            <div class="checkout-payment-actions">
+              <button type="button" class="btn btn-primary" id="stripePayButton">
+                <i class="far fa-credit-card"></i> Carte bancaire — Stripe
+              </button>
+              <button type="button" class="btn btn-gold" id="paypalPayButton">
+                <i class="fab fa-paypal"></i> Payer avec PayPal
+              </button>
             </div>
           </div>
-
-          <!-- Submit -->
-          <button class="btn btn-gold" style="width:100%; padding:18px; font-size:0.9rem;" onclick="handleCheckout()">
-            <i class="fas fa-lock"></i> Confirmer et payer
-          </button>
-          <p style="text-align:center; font-size:0.75rem; color:var(--gray); margin-top:12px;">
-            En confirmant votre commande, vous acceptez nos <a href="#" style="color:var(--gold-dark); text-decoration:underline;">conditions générales de vente</a>.
-          </p>
+          <p id="checkoutPaymentMessage" class="checkout-payment-message" role="status" aria-live="polite"></p>
         </div>
 
         <!-- Right: Order Summary -->
@@ -217,10 +107,10 @@
           </div>
 
           <div class="trust-badges">
-            <div class="trust-badge"><i class="fas fa-shield-alt"></i> Paiement sécurisé</div>
+            <div class="trust-badge"><i class="fas fa-comments"></i> Service client</div>
             <div class="trust-badge"><i class="fas fa-truck"></i> Livraison rapide</div>
             <div class="trust-badge"><i class="fas fa-undo"></i> Retours 7 jours</div>
-            <div class="trust-badge"><i class="fas fa-lock"></i> SSL Chiffré</div>
+            <div class="trust-badge"><i class="fas fa-lock"></i> Paiement chez le prestataire</div>
           </div>
         </div>
       </div>

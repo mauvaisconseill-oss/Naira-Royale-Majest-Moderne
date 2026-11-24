@@ -158,6 +158,8 @@ const PRODUCTS = [
 // ==========================================
 let cart = JSON.parse(localStorage.getItem('nairaRoyaleCart')) || [];
 let wishlist = JSON.parse(localStorage.getItem('nairaRoyaleWishlist')) || [];
+if (!Array.isArray(wishlist)) wishlist = [];
+wishlist = [...new Set(wishlist.map(Number).filter(id => PRODUCTS.some(product => product.id === id)))];
 
 function saveCart() {
   localStorage.setItem('nairaRoyaleCart', JSON.stringify(cart));
@@ -166,6 +168,7 @@ function saveCart() {
 
 function saveWishlist() {
   localStorage.setItem('nairaRoyaleWishlist', JSON.stringify(wishlist));
+  updateWishlistUI();
 }
 
 // ==========================================
@@ -173,7 +176,7 @@ function saveWishlist() {
 // ==========================================
 function addToCart(productId, size = 'M', qty = 1) {
   const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
+  if (!product) return false;
 
   const existingIdx = cart.findIndex(item => item.id === productId && item.size === size);
   if (existingIdx > -1) {
@@ -191,7 +194,8 @@ function addToCart(productId, size = 'M', qty = 1) {
   }
   saveCart();
   showToast(`${product.name} ajouté au panier ✓`);
-  openCart();
+  if (document.getElementById('cartSidebar')) openCart();
+  return true;
 }
 
 function removeFromCart(index) {
@@ -231,19 +235,28 @@ function formatPrice(price) {
 // WISHLIST
 // ==========================================
 function toggleWishlist(productId) {
-  const idx = wishlist.indexOf(productId);
+  const id = Number(productId);
+  if (!PRODUCTS.some(product => product.id === id)) return;
+
+  const idx = wishlist.indexOf(id);
   if (idx > -1) {
     wishlist.splice(idx, 1);
     showToast('Retiré de la liste de souhaits');
   } else {
-    wishlist.push(productId);
+    wishlist.push(id);
     showToast('Ajouté à la liste de souhaits ♡');
   }
   saveWishlist();
-  // Update heart icons
-  document.querySelectorAll(`[data-wishlist="${productId}"]`).forEach(btn => {
-    btn.classList.toggle('wishlisted', wishlist.includes(productId));
-    btn.innerHTML = wishlist.includes(productId) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+
+  const isWished = wishlist.includes(id);
+  document.querySelectorAll(`[data-wishlist="${id}"]`).forEach(btn => {
+    btn.classList.toggle('wishlisted', isWished);
+    btn.classList.toggle('active', isWished);
+    const icon = btn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fas', isWished);
+      icon.classList.toggle('far', !isWished);
+    }
   });
 }
 
@@ -303,6 +316,134 @@ function updateCartUI() {
       });
     }
   }
+}
+
+function updateWishlistUI() {
+  const count = wishlist.length;
+  document.querySelectorAll('.wishlist-count').forEach(countEl => {
+    countEl.textContent = count;
+    countEl.style.display = count > 0 ? 'flex' : 'none';
+  });
+
+  const wishlistBtn = document.getElementById('wishlistBtn');
+  if (wishlistBtn) {
+    const icon = wishlistBtn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fas', count > 0);
+      icon.classList.toggle('far', count === 0);
+    }
+    wishlistBtn.setAttribute('aria-label', `Favoris${count ? ` (${count})` : ''}`);
+  }
+
+  renderWishlistPanel();
+}
+
+function setupWishlistPanel() {
+  if (document.getElementById('wishlistPanel')) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'wishlist-overlay';
+  overlay.id = 'wishlistOverlay';
+
+  const panel = document.createElement('aside');
+  panel.className = 'wishlist-panel';
+  panel.id = 'wishlistPanel';
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-modal', 'true');
+  panel.setAttribute('aria-labelledby', 'wishlistTitle');
+  panel.setAttribute('aria-hidden', 'true');
+  panel.innerHTML = `
+    <div class="wishlist-header">
+      <h2 id="wishlistTitle">Mes favoris</h2>
+      <button class="wishlist-close" id="wishlistClose" type="button" aria-label="Fermer les favoris">&times;</button>
+    </div>
+    <div class="wishlist-items" id="wishlistItems"></div>
+  `;
+  document.body.append(overlay, panel);
+
+  overlay.addEventListener('click', closeWishlist);
+  panel.querySelector('#wishlistClose').addEventListener('click', closeWishlist);
+  panel.addEventListener('click', event => {
+    const removeButton = event.target.closest('[data-remove-wishlist]');
+    if (removeButton) toggleWishlist(removeButton.dataset.removeWishlist);
+  });
+}
+
+function renderWishlistPanel() {
+  const items = document.getElementById('wishlistItems');
+  if (!items) return;
+
+  items.replaceChildren();
+  const products = wishlist
+    .map(id => PRODUCTS.find(product => product.id === id))
+    .filter(Boolean);
+
+  if (!products.length) {
+    const empty = document.createElement('p');
+    empty.className = 'wishlist-empty';
+    empty.textContent = 'Aucune robe dans vos favoris pour le moment.';
+    items.appendChild(empty);
+    return;
+  }
+
+  products.forEach(product => {
+    const item = document.createElement('article');
+    item.className = 'wishlist-item';
+
+    const link = document.createElement('a');
+    link.className = 'wishlist-item-image';
+    link.href = `product.html?id=${product.id}`;
+    const image = document.createElement('img');
+    image.src = product.image;
+    image.alt = product.name;
+    image.loading = 'lazy';
+    link.appendChild(image);
+
+    const details = document.createElement('div');
+    details.className = 'wishlist-item-details';
+    const nameLink = document.createElement('a');
+    nameLink.className = 'wishlist-item-name';
+    nameLink.href = link.href;
+    nameLink.textContent = product.name;
+    const price = document.createElement('span');
+    price.className = 'wishlist-item-price';
+    price.textContent = formatPrice(product.price);
+    const removeButton = document.createElement('button');
+    removeButton.className = 'wishlist-remove';
+    removeButton.type = 'button';
+    removeButton.dataset.removeWishlist = product.id;
+    removeButton.textContent = 'Retirer des favoris';
+    details.append(nameLink, price, removeButton);
+    item.append(link, details);
+    items.appendChild(item);
+  });
+}
+
+function openWishlist() {
+  setupWishlistPanel();
+  const overlay = document.getElementById('wishlistOverlay');
+  const panel = document.getElementById('wishlistPanel');
+  if (overlay) overlay.classList.add('active');
+  if (panel) {
+    panel.classList.add('active');
+    panel.setAttribute('aria-hidden', 'false');
+  }
+  const wishlistBtn = document.getElementById('wishlistBtn');
+  if (wishlistBtn) wishlistBtn.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWishlist() {
+  const overlay = document.getElementById('wishlistOverlay');
+  const panel = document.getElementById('wishlistPanel');
+  if (overlay) overlay.classList.remove('active');
+  if (panel) {
+    panel.classList.remove('active');
+    panel.setAttribute('aria-hidden', 'true');
+  }
+  const wishlistBtn = document.getElementById('wishlistBtn');
+  if (wishlistBtn) wishlistBtn.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
 }
 
 // ==========================================
@@ -549,6 +690,7 @@ function renderProductDetail() {
         <span class="count">${product.rating} (${product.reviews} avis)</span>
       </div>
 
+      <div class="product-price">${formatPrice(product.price)}</div>
       <p class="product-description">${product.description}</p>
 
       <!-- Color -->
@@ -561,8 +703,17 @@ function renderProductDetail() {
         </div>
       </div>
 
+      <div class="product-option">
+        <div class="product-option-label">Choisissez une taille — ajout direct au panier</div>
+        <div class="size-options">
+          ${product.sizes.map(size => `
+            <button type="button" class="size-btn" onclick="selectSize(this, '${size}', ${product.id})">${size}</button>
+          `).join('')}
+        </div>
+      </div>
+
       <div class="add-to-cart-row">
-        <a href="contact.html" class="btn btn-primary" style="flex:1; text-align:center;">Nous contacter pour cette création</a>
+        <span style="flex:1; font-size:0.82rem; color:var(--gray);">Touchez votre taille pour ajouter la robe au panier.</span>
         <button class="btn-wishlist ${wishlist.includes(product.id) ? 'active' : ''}" onclick="toggleWishlist(${product.id})" data-wishlist="${product.id}">
           <i class="${wishlist.includes(product.id) ? 'fas' : 'far'} fa-heart"></i>
         </button>
@@ -590,10 +741,11 @@ function renderProductDetail() {
 
 let selectedSize = 'M';
 
-function selectSize(btn, size) {
+function selectSize(btn, size, productId) {
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   selectedSize = size;
+  addProductToCart(productId, size);
 }
 
 function changeQty(delta) {
@@ -605,10 +757,12 @@ function changeQty(delta) {
   input.value = val;
 }
 
-function addProductToCart(productId) {
+function addProductToCart(productId, size = selectedSize) {
   const qtyInput = document.getElementById('qtyInput');
   const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-  addToCart(productId, selectedSize, qty);
+  if (addToCart(productId, size, qty)) {
+    window.location.href = 'panier.html';
+  }
 }
 
 // ==========================================
@@ -675,6 +829,10 @@ function renderCartPage() {
 function renderCheckoutPage() {
   const checkoutItems = document.getElementById('checkoutItems');
   if (!checkoutItems) return;
+  if (cart.length === 0) {
+    window.location.href = 'panier.html';
+    return;
+  }
 
   checkoutItems.innerHTML = cart.map(item => `
     <div class="checkout-summary-item">
@@ -688,7 +846,9 @@ function renderCheckoutPage() {
   `).join('');
 
   const subtotal = getCartTotal();
-  const shipping = 5.90;
+  const selectedDelivery = document.querySelector('input[name="delivery"]:checked');
+  const delivery = selectedDelivery ? selectedDelivery.value : 'domicile';
+  const shipping = subtotal >= 150 ? 0 : delivery === 'relais' ? 3.90 : 5.90;
   const total = subtotal + shipping;
 
   const subEl = document.getElementById('checkoutSubtotal');
@@ -696,12 +856,158 @@ function renderCheckoutPage() {
   const shippingEl = document.getElementById('checkoutShipping');
 
   if (subEl) subEl.textContent = formatPrice(subtotal);
-  if (shippingEl) shippingEl.textContent = subtotal >= 150 ? 'Gratuit' : formatPrice(shipping);
-  if (totalEl) totalEl.textContent = formatPrice(subtotal >= 150 ? subtotal : total);
+  if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Gratuit' : formatPrice(shipping);
+  if (totalEl) totalEl.textContent = formatPrice(total);
 }
 
-function handleCheckout() {
-  showToast('✨ Commande simulée — Intégrez votre solution de paiement ici');
+function showCheckoutMessage(message, isError = true) {
+  const messageEl = document.getElementById('checkoutPaymentMessage');
+  if (!messageEl) return;
+  messageEl.textContent = message;
+  messageEl.style.color = isError ? 'var(--error)' : 'var(--success)';
+}
+
+function showCheckoutStatus(message, isError = false) {
+  const statusEl = document.getElementById('checkoutPaymentStatus');
+  if (!statusEl) return;
+  statusEl.hidden = false;
+  statusEl.classList.toggle('is-error', isError);
+  statusEl.textContent = message;
+}
+
+function checkoutPayload() {
+  const selectedDelivery = document.querySelector('input[name="delivery"]:checked');
+  return {
+    items: cart.map(item => ({ id: item.id, size: item.size, quantity: item.qty })),
+    delivery: selectedDelivery ? selectedDelivery.value : 'domicile'
+  };
+}
+
+async function postCheckoutRequest(endpoint, payload) {
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch {
+    throw new Error('Connexion impossible. Vérifie ta connexion puis réessaie.');
+  }
+
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error('Le serveur a renvoyé une réponse invalide.');
+  }
+  if (!response.ok) throw new Error(data.error || 'Le paiement n’a pas pu être démarré.');
+  return data;
+}
+
+async function startCheckoutPayment(provider, button) {
+  const originalLabel = button.innerHTML;
+  button.disabled = true;
+  showCheckoutMessage(`Connexion à ${provider}…`, false);
+
+  try {
+    const endpoint = provider === 'Stripe' ? '/api/create-stripe-checkout' : '/api/paypal-create-order';
+    const data = await postCheckoutRequest(endpoint, checkoutPayload());
+    const targetUrl = provider === 'Stripe' ? data.url : data.approvalUrl;
+    if (!targetUrl) throw new Error(`${provider} n’a pas fourni de lien de paiement.`);
+
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(targetUrl);
+    } catch {
+      throw new Error(`Le lien de paiement ${provider} est invalide.`);
+    }
+
+    const allowedHosts = provider === 'Stripe'
+      ? ['checkout.stripe.com']
+      : ['www.paypal.com', 'www.sandbox.paypal.com'];
+    if (parsedUrl.protocol !== 'https:' || !allowedHosts.includes(parsedUrl.hostname)) {
+      throw new Error(`Le lien de paiement ${provider} n’est pas sûr.`);
+    }
+
+    window.location.assign(parsedUrl.href);
+  } catch (error) {
+    showCheckoutMessage(error.message);
+    button.disabled = false;
+    button.innerHTML = originalLabel;
+  }
+}
+
+function finishCheckoutPayment(message) {
+  cart = [];
+  saveCart();
+  updateCartUI();
+  const layout = document.getElementById('checkoutLayout');
+  if (layout) layout.hidden = true;
+  showCheckoutStatus(message);
+  window.history.replaceState({}, '', 'checkout.html?payment=confirmed');
+}
+
+async function handleCheckoutReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const payment = params.get('payment');
+
+  if (payment === 'cancelled') {
+    showCheckoutStatus('Paiement annulé. Ton panier est conservé, tu peux réessayer.');
+    window.history.replaceState({}, '', 'checkout.html');
+    return;
+  }
+
+  if (payment === 'stripe-return') {
+    const sessionId = params.get('session_id');
+    if (!sessionId) {
+      showCheckoutStatus('La référence Stripe est absente. Ton panier est conservé.', true);
+      return;
+    }
+    showCheckoutStatus('Vérification du paiement Stripe…');
+    try {
+      const result = await postCheckoutRequest('/api/stripe-session-status', { sessionId });
+      if (result.paid) {
+        finishCheckoutPayment('Paiement confirmé. Merci pour ta commande !');
+      } else {
+        showCheckoutStatus('Stripe n’a pas confirmé le paiement. Ton panier est conservé.', true);
+      }
+    } catch (error) {
+      showCheckoutStatus(error.message, true);
+    }
+  }
+
+  if (payment === 'paypal-return') {
+    const orderId = params.get('token');
+    if (!orderId) {
+      showCheckoutStatus('La référence PayPal est absente. Ton panier est conservé.', true);
+      return;
+    }
+    showCheckoutStatus('Confirmation du paiement PayPal…');
+    try {
+      const result = await postCheckoutRequest('/api/paypal-capture-order', { orderId });
+      if (result.paid) {
+        finishCheckoutPayment('Paiement confirmé. Merci pour ta commande !');
+      } else {
+        showCheckoutStatus('PayPal n’a pas confirmé le paiement. Ton panier est conservé.', true);
+      }
+    } catch (error) {
+      showCheckoutStatus(error.message, true);
+    }
+  }
+}
+
+function setupCheckoutPayments() {
+  const stripeButton = document.getElementById('stripePayButton');
+  const paypalButton = document.getElementById('paypalPayButton');
+  if (!stripeButton || !paypalButton) return;
+
+  stripeButton.addEventListener('click', () => startCheckoutPayment('Stripe', stripeButton));
+  paypalButton.addEventListener('click', () => startCheckoutPayment('PayPal', paypalButton));
+  document.querySelectorAll('input[name="delivery"]').forEach(input => {
+    input.addEventListener('change', renderCheckoutPage);
+  });
+  handleCheckoutReturn();
 }
 
 // ==========================================
@@ -962,8 +1268,10 @@ function setupHeaderMegaMenus() {
 // INIT
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+  setupWishlistPanel();
   // Update cart UI on load
   updateCartUI();
+  updateWishlistUI();
 
   // Render featured products on homepage
   renderFeaturedProducts();
@@ -972,6 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render catalogue and apply URL category filters
   renderCatalogue();
   setupTestimonials();
+  setupCheckoutPayments();
 
   const introDescription = document.getElementById('catalogueIntroDescription');
   const introToggle = document.getElementById('catalogueIntroToggle');
@@ -989,7 +1298,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cart button
   const cartBtn = document.getElementById('cartBtn');
-  if (cartBtn) cartBtn.addEventListener('click', openCart);
+  if (cartBtn) {
+    cartBtn.addEventListener('click', () => {
+      if (document.getElementById('cartSidebar')) {
+        openCart();
+      } else {
+        window.location.href = 'panier.html';
+      }
+    });
+  }
+
+  const wishlistBtn = document.getElementById('wishlistBtn');
+  if (wishlistBtn) {
+    wishlistBtn.addEventListener('click', event => {
+      event.preventDefault();
+      openWishlist();
+    });
+  }
 
   // Cart close
   const cartClose = document.getElementById('cartClose');
@@ -1010,6 +1335,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') {
       closeSearch();
       closeCart();
+      closeWishlist();
     }
   });
 
@@ -1046,21 +1372,6 @@ document.addEventListener('DOMContentLoaded', () => {
     opt.addEventListener('click', () => {
       document.querySelectorAll('.delivery-option').forEach(o => o.classList.remove('active'));
       opt.classList.add('active');
-    });
-  });
-
-  // Payment methods toggle
-  document.querySelectorAll('.payment-method').forEach(method => {
-    method.addEventListener('click', () => {
-      document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-      method.classList.add('active');
-      
-      // Show/hide card details
-      const cardDetails = document.getElementById('cardDetails');
-      const radio = method.querySelector('input[type="radio"]');
-      if (cardDetails && radio) {
-        cardDetails.style.display = radio.value === 'card' ? 'block' : 'none';
-      }
     });
   });
 
