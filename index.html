@@ -162,7 +162,7 @@
     <div class="container">
       <div class="story-inner">
         <div class="story-image reveal">
-          <img src="img/products/robe-ambre.jpg" alt="L'histoire Naira Royale">
+          <img src="img/products/robe-bleu-ocean.jpg" alt="L'histoire Naira Royale">
         </div>
         <div class="story-content reveal">
           <h2>Notre Histoire</h2>
@@ -214,6 +214,32 @@
           <div class="testimonial-author">Mariama B.</div>
           <div class="testimonial-verified">✓ Avis cliente</div>
         </div>
+
+        <form class="testimonial-form reveal" id="testimonialForm">
+          <h3>Partagez votre expérience</h3>
+          <div class="testimonial-form-fields">
+            <label>
+              Votre prénom
+              <input type="text" name="name" required maxlength="40" placeholder="Ex. Aïcha">
+            </label>
+            <label>
+              Votre note
+              <select name="rating" required>
+                <option value="5">★★★★★ (5/5)</option>
+                <option value="4">★★★★☆ (4/5)</option>
+                <option value="3">★★★☆☆ (3/5)</option>
+                <option value="2">★★☆☆☆ (2/5)</option>
+                <option value="1">★☆☆☆☆ (1/5)</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Votre avis
+            <textarea name="text" rows="4" required maxlength="500" placeholder="Dites-nous ce que vous avez pensé de votre création..."></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary">Publier mon avis</button>
+          <p class="testimonial-form-message" id="testimonialFormMessage" role="status"></p>
+        </form>
       </div>
     </div>
   </section>

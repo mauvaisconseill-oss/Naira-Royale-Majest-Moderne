@@ -327,7 +327,7 @@ function closeCart() {
 // ==========================================
 // PRODUCT CARD RENDERING
 // ==========================================
-function createProductCard(product) {
+function createProductCard(product, showActions = true) {
   const isWished = wishlist.includes(product.id);
   return `
     <div class="product-card reveal" data-category="${product.category}" data-color="${product.color}">
@@ -336,14 +336,14 @@ function createProductCard(product) {
           <img src="${product.image}" alt="${product.name}" loading="lazy">
         </a>
         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-        <div class="product-actions">
+        ${showActions ? `<div class="product-actions">
           <button class="product-action-btn ${isWished ? 'wishlisted' : ''}" data-wishlist="${product.id}" onclick="toggleWishlist(${product.id})" aria-label="Favoris">
             <i class="${isWished ? 'fas' : 'far'} fa-heart"></i>
           </button>
           <a href="product.html?id=${product.id}" class="product-action-btn" aria-label="Voir">
             <i class="far fa-eye"></i>
           </a>
-        </div>
+        </div>` : ''}
       </div>
       <div class="product-card-info">
         <h3 class="product-card-name">
@@ -365,6 +365,48 @@ function createEveningPromoCard(contextClass) {
       </span>
     </a>
   `;
+}
+
+function addTestimonialCard({ name, rating, text }) {
+  const card = document.createElement('div');
+  card.className = 'testimonial-card';
+
+  const stars = document.createElement('div');
+  stars.className = 'testimonial-stars';
+  stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+  const review = document.createElement('p');
+  review.className = 'testimonial-text';
+  review.textContent = `« ${text} »`;
+
+  const author = document.createElement('div');
+  author.className = 'testimonial-author';
+  author.textContent = name;
+
+  const verified = document.createElement('div');
+  verified.className = 'testimonial-verified';
+  verified.textContent = '✓ Avis cliente';
+
+  card.append(stars, review, author, verified);
+  document.querySelector('.testimonials-slider')?.appendChild(card);
+}
+
+function setupTestimonials() {
+  const form = document.getElementById('testimonialForm');
+  const message = document.getElementById('testimonialFormMessage');
+  if (!form || !message) return;
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const name = formData.get('name').trim();
+    const text = formData.get('text').trim();
+    const rating = Number(formData.get('rating'));
+
+    addTestimonialCard({ name, rating, text });
+    form.reset();
+    message.textContent = 'Merci ! Votre avis a bien été ajouté.';
+  });
 }
 
 function shouldShowEveningPromo() {
@@ -398,7 +440,7 @@ function renderFeaturedProducts() {
 
   const featured = PRODUCTS.slice(0, 4);
   grid.innerHTML = featured
-    .map((product, index) => `${index === 2 ? createEveningPromoCard('featured-promo') : ''}${createProductCard(product)}`)
+    .map((product, index) => `${index === 2 ? createEveningPromoCard('featured-promo') : ''}${createProductCard(product, false)}`)
     .join('');
 
   // Trigger reveal animations
@@ -927,6 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render catalogue and apply URL category filters
   renderCatalogue();
+  setupTestimonials();
 
   const introDescription = document.getElementById('catalogueIntroDescription');
   const introToggle = document.getElementById('catalogueIntroToggle');
