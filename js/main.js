@@ -429,21 +429,6 @@ function setupFeaturedCarousel() {
     });
   });
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.setInterval(() => {
-      if (document.hidden) return;
-
-      const distance = getScrollDistance();
-      const maxScroll = grid.scrollWidth - grid.clientWidth;
-      if (!distance || maxScroll <= 0) return;
-
-      const nextPosition = grid.scrollLeft + distance;
-      grid.scrollTo({
-        left: nextPosition >= maxScroll - 1 ? 0 : nextPosition,
-        behavior: 'smooth'
-      });
-    }, 3500);
-  }
 }
 
 // ==========================================

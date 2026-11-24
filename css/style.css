@@ -3836,7 +3836,7 @@ body {
   @media (max-width: 700px) {
     .featured-carousel .product-card,
     .featured-carousel .editorial-promo {
-      flex-basis: min(52%, 180px);
+      flex-basis: min(38%, 180px);
     }
   }
 
@@ -3846,4 +3846,13 @@ body {
 
 .section-categories {
   padding-top: 32px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: min(90vh, 780px);
+    min-height: 680px;
+    max-height: 780px;
+    padding-bottom: 40px;
+  }
 }
