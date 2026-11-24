@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement — Naira Royale</title>
+  <meta http-equiv="refresh" content="0;url=index.html">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="img/logo/logo-naira-royale.jpg" alt="Naira Royale Logo"></a>
+      <nav class="nav-main" id="navMain" style="gap:20px;">
+        <a href="panier.html" style="display:flex; align-items:center; gap:6px;"><i class="fas fa-arrow-left" style="font-size:0.7rem;"></i> Retour au panier</a>
+      </nav>
+      <div class="header-actions">
+        <span style="font-size:0.8rem; color:var(--gray); display:flex; align-items:center; gap:6px;">
+          <i class="fas fa-lock" style="color:var(--gold);"></i> Paiement sécurisé
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Checkout -->
+  <section>
+    <div class="container">
+      <div class="checkout-layout">
+        <!-- Left: Forms -->
+        <div>
+          <!-- Contact -->
+          <div class="checkout-section">
+            <h2>Contact</h2>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Adresse e-mail</label>
+                <input type="email" placeholder="votre@email.com">
+              </div>
+            </div>
+            <label class="filter-option" style="margin-top:8px;">
+              <input type="checkbox"> M'envoyer les actualités et offres par e-mail
+            </label>
+          </div>
+
+          <!-- Shipping Address -->
+          <div class="checkout-section">
+            <h2>Adresse de livraison</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" placeholder="Prénom">
+              </div>
+              <div class="form-group">
+                <label>Nom</label>
+                <input type="text" placeholder="Nom">
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Adresse</label>
+                <input type="text" placeholder="Numéro et nom de rue">
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Complément d'adresse (optionnel)</label>
+                <input type="text" placeholder="Appartement, étage, bâtiment...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Code postal</label>
+                <input type="text" placeholder="75000">
+              </div>
+              <div class="form-group">
+                <label>Ville</label>
+                <input type="text" placeholder="Paris">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Pays</label>
+                <select>
+                  <option>France</option>
+                  <option>Belgique</option>
+                  <option>Suisse</option>
+                  <option>Luxembourg</option>
+                  <option>Canada</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Téléphone</label>
+                <input type="tel" placeholder="+33 6 00 00 00 00">
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery -->
+          <div class="checkout-section">
+            <h2>Mode de livraison</h2>
+            <div class="delivery-options">
+              <label class="delivery-option active">
+                <div class="left">
+                  <input type="radio" name="delivery" value="domicile" checked>
+                  <div>
+                    <strong>Livraison à domicile</strong>
+                    <p style="font-size:0.8rem; color:var(--gray); margin-top:2px;">3 à 7 jours ouvrés</p>
+                  </div>
+                </div>
+                <span class="delivery-price">5,90 €</span>
+              </label>
+              <label class="delivery-option">
+                <div class="left">
+                  <input type="radio" name="delivery" value="relais">
+                  <div>
+                    <strong>Point relais</strong>
+                    <p style="font-size:0.8rem; color:var(--gray); margin-top:2px;">3 à 7 jours ouvrés</p>
+                  </div>
+                </div>
+                <span class="delivery-price">3,90 €</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="checkout-section">
+            <h2>Paiement</h2>
+            <p style="font-size:0.85rem; color:var(--gray); margin-bottom:16px;">
+              <i class="fas fa-lock" style="color:var(--gold);"></i> Toutes les transactions sont sécurisées et chiffrées.
+            </p>
+            <div class="payment-methods">
+              <label class="payment-method active">
+                <input type="radio" name="payment" value="card" checked>
+                <i class="far fa-credit-card" style="font-size:1.3rem;"></i>
+                <div>
+                  <strong>Carte bancaire</strong>
+                  <p style="font-size:0.75rem; color:var(--gray);">Visa, Mastercard, CB</p>
+                </div>
+              </label>
+              <label class="payment-method">
+                <input type="radio" name="payment" value="paypal">
+                <i class="fab fa-paypal" style="font-size:1.3rem; color:#003087;"></i>
+                <strong>PayPal</strong>
+              </label>
+              <label class="payment-method">
+                <input type="radio" name="payment" value="apple">
+                <i class="fab fa-apple-pay" style="font-size:1.5rem;"></i>
+                <strong>Apple Pay</strong>
+              </label>
+              <label class="payment-method">
+                <input type="radio" name="payment" value="google">
+                <i class="fab fa-google-pay" style="font-size:1.5rem;"></i>
+                <strong>Google Pay</strong>
+              </label>
+            </div>
+
+            <!-- Card Details (Interface Only) -->
+            <div id="cardDetails" style="margin-top:20px; padding:24px; background:var(--off-white); border-radius:var(--radius-md);">
+              <div class="form-row full">
+                <div class="form-group">
+                  <label>Numéro de carte</label>
+                  <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Date d'expiration</label>
+                  <input type="text" placeholder="MM / AA" maxlength="7">
+                </div>
+                <div class="form-group">
+                  <label>Code de sécurité (CVV)</label>
+                  <input type="text" placeholder="123" maxlength="4">
+                </div>
+              </div>
+              <div class="form-row full">
+                <div class="form-group">
+                  <label>Nom sur la carte</label>
+                  <input type="text" placeholder="NOM PRÉNOM">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button class="btn btn-gold" style="width:100%; padding:18px; font-size:0.9rem;" onclick="handleCheckout()">
+            <i class="fas fa-lock"></i> Confirmer et payer
+          </button>
+          <p style="text-align:center; font-size:0.75rem; color:var(--gray); margin-top:12px;">
+            En confirmant votre commande, vous acceptez nos <a href="#" style="color:var(--gold-dark); text-decoration:underline;">conditions générales de vente</a>.
+          </p>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div class="checkout-summary">
+          <h3 style="font-size:1.2rem; margin-bottom:16px;">Votre commande</h3>
+          <div id="checkoutItems">
+            <!-- Filled by JS -->
+          </div>
+
+          <div style="margin-top:20px;">
+            <div class="summary-row">
+              <span>Sous-total</span>
+              <span id="checkoutSubtotal">0,00 €</span>
+            </div>
+            <div class="summary-row">
+              <span>Livraison</span>
+              <span id="checkoutShipping">5,90 €</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span class="amount" id="checkoutTotal">0,00 €</span>
+            </div>
+          </div>
+
+          <div class="trust-badges">
+            <div class="trust-badge"><i class="fas fa-shield-alt"></i> Paiement sécurisé</div>
+            <div class="trust-badge"><i class="fas fa-truck"></i> Livraison rapide</div>
+            <div class="trust-badge"><i class="fas fa-undo"></i> Retours 7 jours</div>
+            <div class="trust-badge"><i class="fas fa-lock"></i> SSL Chiffré</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple Footer -->
+  <footer style="background:var(--off-white); padding:24px 0; text-align:center; font-size:0.8rem; color:var(--gray); margin-top:60px;">
+    <p>© 2026 Naira Royale — Majesté Moderne. Tous droits réservés.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="js/main.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => { renderCheckoutPage(); });</script>
+</body>
+</html>

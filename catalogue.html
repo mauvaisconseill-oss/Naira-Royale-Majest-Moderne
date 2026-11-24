@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue — Naira Royale</title>
+  <meta name="description" content="Découvrez notre collection complète de robes tie-dye uniques. Naira Royale — Majesté Moderne.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img src="img/logo/logo-naira-royale.jpg" alt="Naira Royale Logo">
+      </a>
+      <nav class="nav-main" id="navMain">
+        <a href="index.html">Accueil</a>
+        <a href="catalogue.html" class="active">Boutique</a>
+        <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+        <a href="index.html#story">Notre Histoire</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-action-btn" id="searchBtn" aria-label="Rechercher">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="#" class="header-action-btn" id="wishlistBtn" aria-label="Favoris">
+          <i class="far fa-heart"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="search-close" id="searchClose">&times;</button>
+    <div class="search-overlay-inner">
+      <input type="text" placeholder="Rechercher un produit..." id="searchInput" autocomplete="off">
+    </div>
+  </div>
+
+  <section class="catalogue-intro">
+    <div class="container">
+      <h1>ROBES</h1>
+      <p class="catalogue-intro-description" id="catalogueIntroDescription">
+        Des créations tie-dye faites main pour illuminer vos journées et vos grandes occasions.
+        Découvrez nos <a href="catalogue.html?collection=halter">robes Halter</a>,
+        nos <a href="catalogue.html?collection=soiree">modèles de soirée</a> et nos
+        <a href="catalogue.html?collection=nouveautes">nouveautés</a>, aux couleurs uniques.
+      </p>
+      <button class="catalogue-intro-link" id="catalogueIntroToggle" type="button" aria-expanded="false" aria-controls="catalogueIntroDescription">
+        EN SAVOIR PLUS
+      </button>
+    </div>
+  </section>
+
+  <nav class="catalogue-categories" aria-label="Catégories du catalogue">
+    <div class="container" id="catalogue">
+      <button class="catalogue-category active" type="button" data-filter="all">Toutes les robes</button>
+      <button class="catalogue-category" type="button" data-filter="nouveautes">Nouveautés</button>
+      <button class="catalogue-category" type="button" data-filter="halter">Robes Halter</button>
+      <button class="catalogue-category" type="button" data-filter="tie-dye">Tie-Dye Signature</button>
+      <button class="catalogue-category" type="button" data-filter="soiree">Robes de Soirée</button>
+    </div>
+  </nav>
+
+  <!-- Catalogue -->
+  <div class="container">
+    <div class="catalogue-layout">
+      
+      <!-- Filters Sidebar -->
+      <aside class="filters-sidebar">
+        <div class="filter-group">
+          <h3>Catégorie <span class="toggle-icon">−</span></h3>
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked> Toutes les robes
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="halter"> Robes Halter
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="tie-dye"> Tie-Dye Signature
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="soiree"> Robes de Soirée
+          </label>
+        </div>
+
+        <button class="btn filter-reset-btn" style="width:100%; font-size:0.75rem; padding:12px;" onclick="resetFilters()">
+          Réinitialiser les filtres
+        </button>
+      </aside>
+
+      <!-- Products Area -->
+      <div class="catalogue-products">
+        <div class="catalogue-toolbar">
+          <span class="results-count"><span id="resultCount">8</span> résultats</span>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <select class="sort-select" id="sortSelect">
+              <option value="featured">Tri : Mis en avant</option>
+              <option value="name-asc">Nom : A-Z</option>
+              <option value="newest">Nouveautés</option>
+            </select>
+            <div class="view-toggle">
+              <button class="active" data-view="grid" aria-label="Grille"><i class="fas fa-th"></i></button>
+              <button data-view="list" aria-label="Liste"><i class="fas fa-list"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="products-grid" id="catalogueGrid">
+          <!-- Products loaded by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">
+            NAIRA ROYALE
+            <span class="logo-sub">Majesté Moderne</span>
+          </div>
+          <p>Des robes uniques tie-dye qui célèbrent la beauté et la puissance de chaque femme.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Boutique</h4>
+          <a href="catalogue.html">Toutes les Robes</a>
+          <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+          <a href="catalogue.html?collection=tie-dye">Tie-Dye Signature</a>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <a href="contact.html#faq">FAQ</a>
+          <a href="contact.html">Contact</a>
+          <a href="index.html#story">Notre Histoire</a>
+        </div>
+        <div class="footer-col">
+          <h4>Service Client</h4>
+          <a href="contact.html">Conseils personnalisés</a>
+          <a href="contact.html#faq">Questions fréquentes</a>
+          <a href="contact.html">Nous contacter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Naira Royale. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/33600000000" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <button class="back-to-top" id="backToTop" aria-label="Haut"><i class="fas fa-chevron-up"></i></button>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCatalogue();
+    });
+  </script>
+</body>
+</html>

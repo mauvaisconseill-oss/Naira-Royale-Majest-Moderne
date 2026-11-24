@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produit — Naira Royale</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img src="img/logo/logo-naira-royale.jpg" alt="Naira Royale Logo">
+      </a>
+      <nav class="nav-main" id="navMain">
+        <a href="index.html">Accueil</a>
+        <a href="catalogue.html" class="active">Boutique</a>
+        <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+        <a href="index.html#story">Notre Histoire</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-action-btn" id="searchBtn" aria-label="Rechercher">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="#" class="header-action-btn" id="wishlistBtn" aria-label="Favoris">
+          <i class="far fa-heart"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="search-close" id="searchClose">&times;</button>
+    <div class="search-overlay-inner">
+      <input type="text" placeholder="Rechercher un produit..." id="searchInput" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Product Detail -->
+  <section class="product-detail">
+    <div class="container">
+      <div class="product-detail-grid" id="productDetailGrid">
+        <!-- Loaded by JS -->
+      </div>
+
+      <!-- Product Tabs -->
+      <div class="product-tabs" id="productTabs">
+        <div class="tabs-nav">
+          <button class="tab-btn active" data-tab="description">Description</button>
+          <button class="tab-btn" data-tab="details">Détails & Entretien</button>
+          <button class="tab-btn" data-tab="livraison">Contact & Disponibilité</button>
+          <button class="tab-btn" data-tab="avis">Avis Clients</button>
+        </div>
+        <div class="tab-content active" id="tab-description">
+          <p>Cette robe tie-dye unique est confectionnée à la main avec le plus grand soin. Son design halter met en valeur le décolleté et les épaules, tandis que le bustier smocké offre un maintien parfait et un confort absolu. La jupe fluide tombe élégamment jusqu'aux pieds pour une silhouette majestueuse.</p>
+          <p style="margin-top:16px;">Chaque pièce est unique grâce au procédé de teinture artisanale. Les motifs et l'intensité des couleurs peuvent varier légèrement d'une robe à l'autre, ce qui fait le charme de nos créations.</p>
+        </div>
+        <div class="tab-content" id="tab-details">
+          <p><strong>Composition :</strong> 100% coton premium</p>
+          <p><strong>Coupe :</strong> Longue, ajustée au buste, évasée</p>
+          <p><strong>Fermeture :</strong> Bretelles nouées au cou</p>
+          <p><strong>Bustier :</strong> Smocké élastique</p>
+          <p style="margin-top:16px;"><strong>Entretien :</strong></p>
+          <ul style="padding-left:20px; margin-top:8px;">
+            <li style="list-style:disc; margin-bottom:4px;">Lavage à la main recommandé à 30°C</li>
+            <li style="list-style:disc; margin-bottom:4px;">Ne pas utiliser de javel</li>
+            <li style="list-style:disc; margin-bottom:4px;">Séchage à l'air libre</li>
+            <li style="list-style:disc; margin-bottom:4px;">Repasser à température moyenne</li>
+          </ul>
+        </div>
+        <div class="tab-content" id="tab-livraison">
+          <p>Pour toute question sur cette création ou sa disponibilité, notre équipe est à votre écoute.</p>
+          <p style="margin-top:16px;"><a href="contact.html" style="color:var(--gold-dark); text-decoration:underline;">Nous contacter</a></p>
+        </div>
+        <div class="tab-content" id="tab-avis">
+          <div style="display:flex; align-items:center; gap:20px; margin-bottom:24px;">
+            <div style="font-size:3rem; font-weight:700; color:var(--gold-dark);">4.9</div>
+            <div>
+              <div style="color:var(--gold); letter-spacing:3px;">★★★★★</div>
+              <div style="font-size:0.85rem; color:var(--gray); margin-top:4px;">Basé sur 47 avis</div>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--gray-lighter); padding-top:20px;">
+            <div style="margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <strong style="font-size:0.9rem;">Aminata K.</strong>
+                <span style="color:var(--gold); font-size:0.85rem;">★★★★★</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--gray);">Robe magnifique, les couleurs sont sublimes en vrai ! La coupe est parfaite.</p>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <strong style="font-size:0.9rem;">Fatou D.</strong>
+                <span style="color:var(--gold); font-size:0.85rem;">★★★★★</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--gray);">Super qualité, je recommande à 100%. Le tissu est doux et la robe tombe parfaitement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommended Products -->
+      <div style="margin-top:80px;">
+        <h2 class="section-title">Vous aimerez aussi</h2>
+        <div class="gold-line"></div>
+        <div class="products-grid" id="recommendedProducts" style="margin-top:30px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">NAIRA ROYALE<span class="logo-sub">Majesté Moderne</span></div>
+          <p>Des robes uniques tie-dye qui célèbrent la beauté et la puissance de chaque femme.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Boutique</h4>
+          <a href="catalogue.html">Toutes les Robes</a>
+          <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <a href="contact.html#faq">FAQ</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Service Client</h4>
+          <a href="contact.html">Conseils personnalisés</a>
+          <a href="contact.html#faq">Questions fréquentes</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Naira Royale. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/33600000000" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProductDetail();
+    });
+  </script>
+</body>
+</html>

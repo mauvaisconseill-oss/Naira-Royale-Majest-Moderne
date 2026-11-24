@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panier — Naira Royale</title>
+  <meta http-equiv="refresh" content="0;url=index.html">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="logo"><img src="img/logo/logo-naira-royale.jpg" alt="Naira Royale Logo"></a>
+      <nav class="nav-main" id="navMain">
+        <a href="index.html">Accueil</a>
+        <a href="catalogue.html">Boutique</a>
+        <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+        <a href="index.html#story">Notre Histoire</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-action-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+        <a href="#" class="header-action-btn" id="wishlistBtn"><i class="far fa-heart"></i></a>
+        <button class="header-action-btn" id="cartBtn">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay" id="searchOverlay">
+    <button class="search-close" id="searchClose">&times;</button>
+    <div class="search-overlay-inner"><input type="text" placeholder="Rechercher..." id="searchInput"></div>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Votre Panier</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <span class="sep">›</span>
+        <span>Panier</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Page Content -->
+  <section class="cart-page">
+    <div class="container">
+      <div class="cart-page-layout" id="cartPageLayout">
+        <!-- Left: Cart Table -->
+        <div>
+          <table class="cart-table" id="cartTable">
+            <thead>
+              <tr>
+                <th style="width:50%;">Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cartTableBody">
+              <!-- Filled by JS -->
+            </tbody>
+          </table>
+          <div id="cartPageEmpty" style="text-align:center; padding:60px 0; display:none;">
+            <i class="fas fa-shopping-bag" style="font-size:3rem; color:var(--gray-lighter); margin-bottom:16px;"></i>
+            <p style="color:var(--gray); margin-bottom:20px;">Votre panier est vide</p>
+            <a href="catalogue.html" class="btn btn-primary">Continuer mes achats</a>
+          </div>
+        </div>
+
+        <!-- Right: Summary -->
+        <div class="cart-summary" id="cartSummary">
+          <h3>Récapitulatif</h3>
+          <div class="summary-row">
+            <span>Sous-total</span>
+            <span id="summarySubtotal">0,00 €</span>
+          </div>
+          <div class="summary-row">
+            <span>Livraison</span>
+            <span id="summaryShipping">Calculée à l'étape suivante</span>
+          </div>
+          <div class="promo-code">
+            <input type="text" placeholder="Code promo">
+            <button type="button">Appliquer</button>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span class="amount" id="summaryTotal">0,00 €</span>
+          </div>
+          <a href="checkout.html" class="btn btn-primary" style="width:100%; margin-top:20px;">
+            Passer la commande
+          </a>
+          <div class="trust-badges" style="margin-top:20px;">
+            <div class="trust-badge"><i class="fas fa-shield-alt"></i> Paiement sécurisé</div>
+            <div class="trust-badge"><i class="fas fa-truck"></i> Livraison rapide</div>
+            <div class="trust-badge"><i class="fas fa-undo"></i> Retours 7 jours</div>
+            <div class="trust-badge"><i class="fas fa-lock"></i> Données protégées</div>
+          </div>
+          <a href="catalogue.html" style="display:block; text-align:center; margin-top:16px; font-size:0.85rem; color:var(--gold-dark);">
+            ← Continuer mes achats
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">NAIRA ROYALE<span class="logo-sub">Majesté Moderne</span></div>
+          <p>Des robes uniques tie-dye qui célèbrent la beauté et la puissance de chaque femme.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Boutique</h4><a href="catalogue.html">Toutes les Robes</a></div>
+        <div class="footer-col"><h4>Informations</h4><a href="contact.html#faq">FAQ</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>Service Client</h4><a href="#">Suivi de Commande</a><a href="#">Politique de Retour</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Naira Royale. Tous droits réservés.</p>
+        <div class="footer-payments">
+          <span><i class="fab fa-cc-visa"></i> Visa</span>
+          <span><i class="fab fa-cc-mastercard"></i> Mastercard</span>
+          <span><i class="fab fa-cc-paypal"></i> PayPal</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/33600000000" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => { renderCartPage(); });</script>
+</body>
+</html>

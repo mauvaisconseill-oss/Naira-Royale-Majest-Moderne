@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naira Royale — Majesté Moderne | Nos créations</title>
+  <meta name="description" content="Découvrez les créations artisanales tie-dye de Naira Royale — Majesté Moderne. Des pièces uniques pensées pour célébrer chaque femme.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
+</head>
+<body>
+
+  <div class="announcement-bar">
+    Créations faites main
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <!-- Mobile Menu Toggle -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <img src="img/logo/logo-naira-royale.jpg" alt="Naira Royale Logo">
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-main" id="navMain">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="catalogue.html">Boutique</a>
+        <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+        <a href="index.html#story">Notre Histoire</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="header-action-btn" id="searchBtn" aria-label="Rechercher">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="#" class="header-action-btn" id="wishlistBtn" aria-label="Liste de souhaits">
+          <i class="far fa-heart"></i>
+          <span class="cart-count wishlist-count" style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="search-close" id="searchClose">&times;</button>
+    <div class="search-overlay-inner">
+      <input type="text" placeholder="Rechercher un produit..." id="searchInput" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-media"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Collection 2026</p>
+        <h1 class="hero-title">
+          Naira<br><span>Royale</span>
+        </h1>
+        <p class="hero-tagline">Des pièces singulières, faites main pour révéler votre singularité.</p>
+        <div class="hero-cta">
+          <a href="catalogue.html" class="btn btn-light">Découvrir la collection</a>
+        </div>
+      </div>
+
+      <div class="hero-editorial" aria-label="Sélection de robes Naira Royale">
+        <a class="hero-editorial-main" href="catalogue.html?collection=soiree">
+          <img src="img/products/robe-noir-cuivre.jpg" alt="Robe dos nu noir cuivrée">
+          <span>Edition soirée</span>
+        </a>
+        <a class="hero-editorial-top" href="catalogue.html?collection=halter">
+          <img src="img/products/robe-bleu-ocean.jpg" alt="Robe halter bleu océan">
+        </a>
+        <a class="hero-editorial-bottom" href="catalogue.html?collection=tie-dye">
+          <img src="img/products/robe-fuchsia-orange.jpg" alt="Robe tie-dye fuchsia sunset">
+        </a>
+        <div class="hero-editorial-caption">
+          <strong>08</strong>
+          <span>pièces<br>singulières</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section-products" id="featured">
+    <div class="container featured-layout">
+      <div class="featured-content">
+        <h2 class="featured-title reveal">Nos meilleures ventes</h2>
+        <p class="featured-description reveal">Découvrez les robes préférées de nos clientes, confectionnées à la main pour célébrer chaque silhouette.</p>
+
+        <div class="featured-carousel-heading">
+          <span>Les incontournables</span>
+          <div class="featured-carousel-controls">
+            <button type="button" class="featured-carousel-arrow" data-direction="-1" aria-label="Voir les robes précédentes" aria-controls="productsGrid">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button type="button" class="featured-carousel-arrow" data-direction="1" aria-label="Voir les robes suivantes" aria-controls="productsGrid">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="products-grid featured-carousel" id="productsGrid">
+          <!-- Products loaded by JS -->
+        </div>
+
+        <div class="featured-bottom">
+          <div class="featured-signatures" aria-label="Les engagements Naira Royale">
+            <span>Couleurs vibrantes</span>
+          </div>
+          <a href="catalogue.html" class="featured-view-all">Toute la collection <span aria-hidden="true">⟶</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section-categories">
+    <div class="container">
+      <h2 class="section-title reveal">Nos Collections</h2>
+      <div class="gold-line reveal"></div>
+      <p class="section-subtitle reveal">Trouvez la robe qui vous ressemble</p>
+
+      <div class="categories-grid reveal">
+        <a href="catalogue.html?collection=halter" class="category-card">
+          <img src="img/products/robe-bleu-ocean.jpg" alt="Collection Halter">
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Robes Halter</h3>
+            <p class="category-card-count">5 pièces</p>
+          </div>
+        </a>
+        <a href="catalogue.html?collection=tie-dye" class="category-card">
+          <img src="img/products/robe-fuchsia-orange.jpg" alt="Collection Tie-Dye">
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Tie-Dye Signature</h3>
+            <p class="category-card-count">8 pièces</p>
+          </div>
+        </a>
+        <a href="catalogue.html?collection=soiree" class="category-card">
+          <img src="img/products/robe-noir-cuivre.jpg" alt="Collection Soirée">
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Robes de Soirée</h3>
+            <p class="category-card-count">4 pièces</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story -->
+  <section class="section-story" id="story">
+    <div class="container">
+      <div class="story-inner">
+        <div class="story-image reveal">
+          <img src="img/products/robe-ambre.jpg" alt="L'histoire Naira Royale">
+        </div>
+        <div class="story-content reveal">
+          <h2>Notre Histoire</h2>
+          <div class="gold-line"></div>
+          <p>
+            <strong>Naira Royale</strong> est née d'une passion : offrir à chaque femme une pièce unique qui célèbre sa beauté et sa puissance. Chaque robe est une œuvre d'art, teinte à la main avec des motifs tie-dye exclusifs.
+          </p>
+          <p>
+            Notre philosophie ? L'élégance sans compromis. Des matières nobles, des coupes flatteuses pour toutes les silhouettes, et des couleurs vibrantes qui racontent une histoire — la vôtre.
+          </p>
+          <p>
+            Bienvenue dans l'univers de la <em>Majesté Moderne</em>.
+          </p>
+          <div class="story-signature">— Naira Royale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section-testimonials">
+    <div class="container">
+      <h2 class="section-title reveal">Ce que disent nos Clientes</h2>
+      <div class="gold-line reveal"></div>
+      <p class="section-subtitle reveal">Des femmes magnifiques partagent leur expérience</p>
+
+      <div class="testimonials-slider reveal">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">« La robe est absolument magnifique ! La qualité du tissu est incroyable et les couleurs sont encore plus belles en vrai. Je me sens comme une reine. »</p>
+          <div class="testimonial-author">Aminata K.</div>
+          <div class="testimonial-verified">✓ Avis cliente</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">« Enfin une marque qui comprend la beauté de toutes les silhouettes. La coupe est parfaite et le tie-dye est unique. J'adore ! »</p>
+          <div class="testimonial-author">Fatou D.</div>
+          <div class="testimonial-verified">✓ Avis cliente</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">« Livraison rapide, emballage soigné, et la robe est juste WOW. Tout le monde me demande où je l'ai trouvée. Merci Naira Royale ! »</p>
+          <div class="testimonial-author">Sarah M.</div>
+          <div class="testimonial-verified">✓ Avis cliente</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">« Le site est magnifique et la commande était super simple. La robe Bleu Royal est devenue ma pièce préférée. Hâte de recommander ! »</p>
+          <div class="testimonial-author">Mariama B.</div>
+          <div class="testimonial-verified">✓ Avis cliente</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section-newsletter">
+    <div class="container">
+      <h2 class="section-title reveal">Rejoignez le Royaume</h2>
+      <div class="gold-line reveal"></div>
+      <p class="section-subtitle reveal">Inscrivez-vous pour recevoir nos nouveautés et offres exclusives en avant-première</p>
+      <form class="newsletter-form reveal" onsubmit="return handleNewsletter(event)">
+        <input type="email" placeholder="Votre adresse e-mail" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Instagram -->
+  <section class="section-instagram">
+    <div class="container">
+      <h2 class="section-title reveal">@NairaRoyale sur Instagram</h2>
+      <div class="gold-line reveal"></div>
+      <p class="section-subtitle reveal">Suivez-nous pour l'inspiration quotidienne</p>
+    </div>
+    <div class="instagram-marquee reveal" aria-label="Galerie des robes Naira Royale">
+      <div class="instagram-track">
+        <div class="instagram-group">
+          <div class="instagram-item"><img src="img/products/robe-bleu-ocean.jpg" alt="Robe bleu océan, vue de face"><img class="back-view" src="img/products/robe-bleu-ocean.jpg" alt="Robe bleu océan, vue de dos"></div>
+          <div class="instagram-item"><img src="img/products/robe-ambre.jpg" alt="Robe ambre, vue de face"><img class="back-view" src="img/products/robe-ambre.jpg" alt="Robe ambre, vue de dos"></div>
+          <div class="instagram-item"><img src="img/products/robe-fuchsia-orange.jpg" alt="Robe fuchsia, vue de face"><img class="back-view" src="img/products/robe-fuchsia-orange.jpg" alt="Robe fuchsia, vue de dos"></div>
+          <div class="instagram-item"><img src="img/products/robe-bleu-royal.jpg" alt="Robe bleu royal, vue de face"><img class="back-view" src="img/products/robe-bleu-royal.jpg" alt="Robe bleu royal, vue de dos"></div>
+          <div class="instagram-item"><img src="img/products/robe-terracotta.jpg" alt="Robe terracotta, vue de face"><img class="back-view" src="img/products/robe-terracotta.jpg" alt="Robe terracotta, vue de dos"></div>
+          <div class="instagram-item"><img src="img/products/robe-emeraude.jpg" alt="Robe émeraude, vue de face"><img class="back-view" src="img/products/robe-emeraude.jpg" alt="Robe émeraude, vue de dos"></div>
+        </div>
+        <div class="instagram-group" aria-hidden="true">
+          <div class="instagram-item"><img src="img/products/robe-bleu-ocean.jpg" alt=""><img class="back-view" src="img/products/robe-bleu-ocean.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-ambre.jpg" alt=""><img class="back-view" src="img/products/robe-ambre.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-fuchsia-orange.jpg" alt=""><img class="back-view" src="img/products/robe-fuchsia-orange.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-bleu-royal.jpg" alt=""><img class="back-view" src="img/products/robe-bleu-royal.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-terracotta.jpg" alt=""><img class="back-view" src="img/products/robe-terracotta.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-emeraude.jpg" alt=""><img class="back-view" src="img/products/robe-emeraude.jpg" alt=""></div>
+        </div>
+        <div class="instagram-group" aria-hidden="true">
+          <div class="instagram-item"><img src="img/products/robe-bleu-ocean.jpg" alt=""><img class="back-view" src="img/products/robe-bleu-ocean.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-ambre.jpg" alt=""><img class="back-view" src="img/products/robe-ambre.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-fuchsia-orange.jpg" alt=""><img class="back-view" src="img/products/robe-fuchsia-orange.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-bleu-royal.jpg" alt=""><img class="back-view" src="img/products/robe-bleu-royal.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-terracotta.jpg" alt=""><img class="back-view" src="img/products/robe-terracotta.jpg" alt=""></div>
+          <div class="instagram-item"><img src="img/products/robe-emeraude.jpg" alt=""><img class="back-view" src="img/products/robe-emeraude.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">
+            NAIRA ROYALE
+            <span class="logo-sub">Majesté Moderne</span>
+          </div>
+          <p>Des robes uniques tie-dye qui célèbrent la beauté et la puissance de chaque femme. Élégance, qualité et originalité.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Boutique</h4>
+          <a href="catalogue.html">Toutes les Robes</a>
+          <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+          <a href="catalogue.html?collection=tie-dye">Tie-Dye Signature</a>
+          <a href="catalogue.html?collection=soiree">Robes de Soirée</a>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <a href="contact.html#faq">FAQ</a>
+          <a href="contact.html">Contact</a>
+          <a href="#story">Notre Histoire</a>
+          <a href="catalogue.html">Nos créations</a>
+        </div>
+        <div class="footer-col">
+          <h4>Service Client</h4>
+          <a href="contact.html#faq">Questions fréquentes</a>
+          <a href="contact.html">Nous contacter</a>
+          <a href="#">Mentions Légales</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Naira Royale. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/33600000000" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

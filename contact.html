@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & FAQ — Naira Royale</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-naira-royale.jpg">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="logo"><img src="img/logo/logo-naira-royale.jpg" alt="Naira Royale Logo"></a>
+      <nav class="nav-main" id="navMain">
+        <a href="index.html">Accueil</a>
+        <a href="catalogue.html">Boutique</a>
+        <a href="catalogue.html?collection=nouveautes">Nouveautés</a>
+        <a href="index.html#story">Notre Histoire</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-action-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+        <a href="#" class="header-action-btn" id="wishlistBtn"><i class="far fa-heart"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay" id="searchOverlay">
+    <button class="search-close" id="searchClose">&times;</button>
+    <div class="search-overlay-inner"><input type="text" placeholder="Rechercher..." id="searchInput"></div>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Contactez-nous</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <span class="sep">›</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section>
+    <div class="container">
+      <div class="contact-layout">
+        <!-- Contact Info -->
+        <div>
+          <h2 style="font-size:1.6rem; margin-bottom:8px;">On est là pour vous</h2>
+          <p style="color:var(--gray); margin-bottom:30px;">Une question ? Un besoin particulier ? N'hésitez pas à nous écrire, nous répondons sous 24h.</p>
+
+          <div class="contact-info-card">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>contact@naira-royale.com</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <i class="fab fa-whatsapp"></i>
+            <div>
+              <h4>WhatsApp</h4>
+              <p>+33 6 00 00 00 00</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <i class="fab fa-instagram"></i>
+            <div>
+              <h4>Instagram</h4>
+              <p>@NairaRoyale</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>Horaires</h4>
+              <p>Lun - Ven : 9h – 18h<br>Sam : 10h – 16h</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <h2 style="font-size:1.6rem; margin-bottom:24px;">Envoyez-nous un message</h2>
+          <form onsubmit="return handleContact(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" placeholder="Votre prénom" required>
+              </div>
+              <div class="form-group">
+                <label>Nom</label>
+                <input type="text" placeholder="Votre nom" required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label>Email</label>
+              <input type="email" placeholder="votre@email.com" required>
+            </div>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label>Sujet</label>
+              <select required>
+                <option value="">Choisir un sujet</option>
+                <option>Disponibilité d'une création</option>
+                <option>Conseil personnalisé</option>
+                <option>Collaboration</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:24px;">
+              <label>Message</label>
+              <textarea placeholder="Votre message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Envoyer le message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Questions Fréquentes</h2>
+      <div class="gold-line"></div>
+      <p class="section-subtitle">Trouvez rapidement les réponses à vos questions</p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Comment connaître la disponibilité d'une création ?
+            <span class="icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Contactez-nous pour obtenir des informations sur une robe et sa disponibilité.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Comment vous contacter ?
+            <span class="icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Vous pouvez nous écrire par e-mail, nous joindre sur WhatsApp ou nous retrouver sur Instagram. Notre équipe vous répond sous 24h.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Puis-je obtenir un conseil personnalisé ?
+            <span class="icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Bien sûr. Envoyez-nous un message en précisant la création qui vous intéresse, et nous vous guiderons.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Comment entretenir ma robe tie-dye ?
+            <span class="icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Nous recommandons un lavage à la main à 30°C avec des couleurs similaires. Évitez la javel et le sèche-linge. Séchez à l'air libre et repassez à température moyenne si nécessaire.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Puis-je découvrir toute la collection en ligne ?
+            <span class="icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Oui, parcourez notre catalogue pour découvrir toutes les créations et leurs détails.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Les robes sont-elles uniques ?
+            <span class="icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Oui ! Chaque robe est teinte à la main avec notre procédé tie-dye artisanal. Les motifs et les couleurs peuvent varier d'une pièce à l'autre.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">NAIRA ROYALE<span class="logo-sub">Majesté Moderne</span></div>
+          <p>Des robes uniques tie-dye qui célèbrent la beauté et la puissance de chaque femme.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Boutique</h4><a href="catalogue.html">Toutes les Robes</a><a href="catalogue.html?collection=nouveautes">Nouveautés</a></div>
+        <div class="footer-col"><h4>Informations</h4><a href="#faq">FAQ</a><a href="index.html#story">Notre Histoire</a></div>
+        <div class="footer-col"><h4>Service Client</h4><a href="contact.html">Conseils & Contact</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Naira Royale. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/33600000000" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
