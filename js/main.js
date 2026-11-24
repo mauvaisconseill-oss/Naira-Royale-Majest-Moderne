@@ -327,7 +327,7 @@ function closeCart() {
 // ==========================================
 // PRODUCT CARD RENDERING
 // ==========================================
-function createProductCard(product, showActions = true) {
+function createProductCard(product, showActions = true, showSizes = false) {
   const isWished = wishlist.includes(product.id);
   return `
     <div class="product-card reveal" data-category="${product.category}" data-color="${product.color}">
@@ -344,6 +344,9 @@ function createProductCard(product, showActions = true) {
             <i class="far fa-eye"></i>
           </a>
         </div>` : ''}
+        ${showSizes ? `<div class="product-sizes" aria-label="Tailles disponibles">
+          ${product.sizes.map(size => `<span>${size}</span>`).join('')}
+        </div>` : ''}
       </div>
       <div class="product-card-info">
         <h3 class="product-card-name">
@@ -356,7 +359,7 @@ function createProductCard(product, showActions = true) {
 
 function createEveningPromoCard(contextClass) {
   return `
-    <a class="editorial-promo ${contextClass}" href="catalogue.html?collection=soiree" aria-label="Découvrir les robes de soirée">
+    <a class="editorial-promo ${contextClass}" href="catalogue.html" aria-label="Découvrir les robes de soirée">
       <img src="img/products/robe-noir-cuivre.jpg" alt="Robe de soirée noir cuivré" loading="lazy">
       <span class="editorial-promo-content">
         <span class="editorial-promo-eyebrow">La sélection</span>
@@ -424,7 +427,7 @@ function renderCatalogueProducts(products) {
   const grid = document.getElementById('catalogueGrid');
   if (!grid) return;
 
-  const cards = products.map(createProductCard);
+  const cards = products.map(product => createProductCard(product, true, true));
   if (shouldShowEveningPromo()) {
     cards.splice(Math.min(2, cards.length), 0, createEveningPromoCard('catalogue-promo'));
   }
@@ -439,9 +442,8 @@ function renderFeaturedProducts() {
   if (!grid) return;
 
   const featured = PRODUCTS.slice(0, 4);
-  grid.innerHTML = featured
-    .map((product, index) => `${index === 2 ? createEveningPromoCard('featured-promo') : ''}${createProductCard(product, false)}`)
-    .join('');
+  grid.innerHTML = createEveningPromoCard('featured-promo') +
+    featured.map(product => createProductCard(product, false)).join('');
 
   // Trigger reveal animations
   setTimeout(() => observeRevealElements(), 100);
@@ -927,7 +929,7 @@ function setupHeaderMegaMenus() {
     { heading: 'Nos styles', links: [
       ['Robes Halter', 'catalogue.html?collection=halter'],
       ['Tie-Dye Signature', 'catalogue.html?collection=tie-dye'],
-      ['Robes de soirée', 'catalogue.html?collection=soiree']
+      ['Robes de soirée', 'catalogue.html']
     ] }
   ];
 
